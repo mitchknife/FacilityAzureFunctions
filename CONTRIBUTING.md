@@ -10,4 +10,4 @@ If the code generation algorithm changes, run `build.ps1 codegen` to update the 
 
 To publish to NuGet, update the `<VersionPrefix>` in [`Directory.Build.props`](Directory.Build.props) and add a corresponding section to the top of [`ReleaseNotes.md`](ReleaseNotes.md). (To publish a prerelease version, add a `<VersionSuffix>` element below `<VersionPrefix>`.) When the version change is merged to `master`, publishing will happen automatically.
 
-This repository uses the [`faithlife-build`](https://github.com/FacilityApi/FacilityAzureFunctions/tree/faithlife-build) template of [`FacilityApi/FacilityAzureFunctions`](https://github.com/FacilityApi/FacilityAzureFunctions).
+This repository uses the [`faithlife-build`](https://github.com/FacilityApi/RepoTemplate/tree/faithlife-build) template of [`FacilityApi/RepoTemplate`](https://github.com/FacilityApi/RepoTemplate).
