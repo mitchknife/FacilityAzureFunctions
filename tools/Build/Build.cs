@@ -1,6 +1,6 @@
 return BuildRunner.Execute(args, build =>
 {
-	var codegen = "fsdgen___";
+	var codegen = "fsdgenazfunc";
 
 	var gitLogin = new GitLoginInfo("FacilityApiBot", Environment.GetEnvironmentVariable("BUILD_BOT_PASSWORD") ?? "");
 
@@ -41,7 +41,7 @@ return BuildRunner.Execute(args, build =>
 		var configuration = dotNetBuildSettings.GetConfiguration();
 		var verifyOption = verify ? "--verify" : null;
 
-		RunCodeGen("___", "___");
+		RunCodeGen("conformance/ConformanceApi.fsd", "conformance/AzureFunctionsServer/Functions");
 
 		void RunCodeGen(params string?[] args) =>
 			RunDotNet(new[] { "run", "--no-build", "--project", $"src/{codegen}", "-f", "net6.0", "-c", configuration, "--", "--newline", "lf", verifyOption }.Concat(args));

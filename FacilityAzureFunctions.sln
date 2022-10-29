@@ -22,6 +22,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Build", "tools\Build\Build.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XmlDocGen", "tools\XmlDocGen\XmlDocGen.csproj", "{636E5B36-4AA8-47D8-884C-AE4D80B49A14}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{08FF3FD0-5B63-43D8-A0DE-C345F5B45169}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fsdgenazfunc", "src\fsdgenazfunc\fsdgenazfunc.csproj", "{4D1513C7-32D0-426F-8B91-0139A04175FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facility.CodeGen.AzureFunctions", "src\Facility.CodeGen.AzureFunctions\Facility.CodeGen.AzureFunctions.csproj", "{F19C3F11-9F6D-4E00-ADDF-67CABF09B526}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{4D0D0E9F-9A78-4933-9404-B36E5EFDBC0A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facility.CodeGen.AzureFunctions.UnitTests", "tests\Facility.CodeGen.AzureFunctions.UnitTests\Facility.CodeGen.AzureFunctions.UnitTests.csproj", "{F3B42AC2-D75F-4C55-8A6A-682F53F26346}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,11 +46,28 @@ Global
 		{636E5B36-4AA8-47D8-884C-AE4D80B49A14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{636E5B36-4AA8-47D8-884C-AE4D80B49A14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{636E5B36-4AA8-47D8-884C-AE4D80B49A14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D1513C7-32D0-426F-8B91-0139A04175FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D1513C7-32D0-426F-8B91-0139A04175FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D1513C7-32D0-426F-8B91-0139A04175FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D1513C7-32D0-426F-8B91-0139A04175FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F19C3F11-9F6D-4E00-ADDF-67CABF09B526}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F19C3F11-9F6D-4E00-ADDF-67CABF09B526}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F19C3F11-9F6D-4E00-ADDF-67CABF09B526}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F19C3F11-9F6D-4E00-ADDF-67CABF09B526}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3B42AC2-D75F-4C55-8A6A-682F53F26346}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3B42AC2-D75F-4C55-8A6A-682F53F26346}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3B42AC2-D75F-4C55-8A6A-682F53F26346}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3B42AC2-D75F-4C55-8A6A-682F53F26346}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {647F7A73-0365-411F-941D-6DDA8A4CFA1A}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4D1513C7-32D0-426F-8B91-0139A04175FB} = {08FF3FD0-5B63-43D8-A0DE-C345F5B45169}
+		{F19C3F11-9F6D-4E00-ADDF-67CABF09B526} = {08FF3FD0-5B63-43D8-A0DE-C345F5B45169}
+		{F3B42AC2-D75F-4C55-8A6A-682F53F26346} = {4D0D0E9F-9A78-4933-9404-B36E5EFDBC0A}
 	EndGlobalSection
 EndGlobal

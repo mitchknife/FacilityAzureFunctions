@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Description>A library that generates an Azure Functions for a Facility Service Definition.</Description>
+    <PackageTags>Facility FSD Azure Functions CodeGen</PackageTags>
+    <IsPackable>true</IsPackable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Facility.Definition" Version="$(FacilityVersion)" />
+  </ItemGroup>
+
+</Project>
