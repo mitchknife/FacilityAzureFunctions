@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net6.0</TargetFrameworks>
+    <Description>Helpers for using Facility with Azure Functions.</Description>
+    <PackageTags>Facility FSD Azure Functions</PackageTags>
+    <IsPackable>true</IsPackable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Facility.Core" Version="$(FacilityCSharpVersion)"/>
+    <PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.10.0"/>
+    <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http" Version="3.0.13"/>
+  </ItemGroup>
+</Project>

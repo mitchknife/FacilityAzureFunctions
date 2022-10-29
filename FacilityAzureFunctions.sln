@@ -32,6 +32,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{4D0D0E9F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facility.CodeGen.AzureFunctions.UnitTests", "tests\Facility.CodeGen.AzureFunctions.UnitTests\Facility.CodeGen.AzureFunctions.UnitTests.csproj", "{F3B42AC2-D75F-4C55-8A6A-682F53F26346}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facility.AzureFunctions", "src\Facility.AzureFunctions\Facility.AzureFunctions.csproj", "{43FF41B6-DA6E-4652-BC30-0D2F11D86BA3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "conformance", "conformance", "{F7406CDC-A44A-49C2-8B66-3FEF3BC1F2B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureFunctionsServer", "conformance\AzureFunctionsServer\AzureFunctionsServer.csproj", "{C682FE43-05B0-4751-A421-6C044DCA0D24}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +64,14 @@ Global
 		{F3B42AC2-D75F-4C55-8A6A-682F53F26346}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3B42AC2-D75F-4C55-8A6A-682F53F26346}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3B42AC2-D75F-4C55-8A6A-682F53F26346}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43FF41B6-DA6E-4652-BC30-0D2F11D86BA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43FF41B6-DA6E-4652-BC30-0D2F11D86BA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43FF41B6-DA6E-4652-BC30-0D2F11D86BA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43FF41B6-DA6E-4652-BC30-0D2F11D86BA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C682FE43-05B0-4751-A421-6C044DCA0D24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C682FE43-05B0-4751-A421-6C044DCA0D24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C682FE43-05B0-4751-A421-6C044DCA0D24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C682FE43-05B0-4751-A421-6C044DCA0D24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,5 +83,7 @@ Global
 		{4D1513C7-32D0-426F-8B91-0139A04175FB} = {08FF3FD0-5B63-43D8-A0DE-C345F5B45169}
 		{F19C3F11-9F6D-4E00-ADDF-67CABF09B526} = {08FF3FD0-5B63-43D8-A0DE-C345F5B45169}
 		{F3B42AC2-D75F-4C55-8A6A-682F53F26346} = {4D0D0E9F-9A78-4933-9404-B36E5EFDBC0A}
+		{43FF41B6-DA6E-4652-BC30-0D2F11D86BA3} = {08FF3FD0-5B63-43D8-A0DE-C345F5B45169}
+		{C682FE43-05B0-4751-A421-6C044DCA0D24} = {F7406CDC-A44A-49C2-8B66-3FEF3BC1F2B5}
 	EndGlobalSection
 EndGlobal
