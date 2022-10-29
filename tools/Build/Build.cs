@@ -41,8 +41,9 @@ return BuildRunner.Execute(args, build =>
 		var configuration = dotNetBuildSettings.GetConfiguration();
 		var verifyOption = verify ? "--verify" : null;
 
-		RunCodeGen("conformance/ConformanceApi.fsd", "conformance/AzureFunctionsServer",
-			"--namespace", "AzureFunctionsServer");
+		RunDotNet("FacilityConformance", "fsd", "--output", "conformance/ConformanceApi.fsd", verifyOption);
+		RunDotNet("FacilityConformance", "json", "--output", "conformance/ConformanceTests.json", verifyOption);
+		RunCodeGen("conformance/ConformanceApi.fsd", "conformance/AzureFunctionsServer", "--namespace", "AzureFunctionsServer");
 
 		void RunCodeGen(params string?[] args) =>
 			RunDotNet(new[] { "run", "--no-build", "--project", $"src/{codegen}", "-f", "net6.0", "-c", configuration, "--", "--newline", "lf", verifyOption }.Concat(args));
