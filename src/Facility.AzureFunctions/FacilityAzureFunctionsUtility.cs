@@ -33,7 +33,10 @@ public static class FacilityAzureFunctionsUtility
 		};
 
 		foreach (var header in requestData.Headers)
-			requestMessage.Headers.Add(header.Key, header.Value);
+		{
+			if (!requestMessage.Headers.TryAddWithoutValidation(header.Key, header.Value))
+				requestMessage.Content.Headers.TryAddWithoutValidation(header.Key, header.Value);
+		}
 
 		return requestMessage;
 	}
@@ -41,7 +44,7 @@ public static class FacilityAzureFunctionsUtility
 	private static async Task WriteToResponseDataAsync(HttpResponseData responseData, HttpResponseMessage responseMessage)
 	{
 		responseData.StatusCode = responseMessage.StatusCode;
-		foreach (var header in responseMessage.Headers)
+		foreach (var header in responseMessage.Headers.Concat(responseMessage.Content.Headers))
 			responseData.Headers.Add(header.Key, header.Value);
 		responseData.Body = await responseMessage.Content.ReadAsStreamAsync();
 	}
