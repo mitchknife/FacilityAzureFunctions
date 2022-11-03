@@ -1,3 +1,4 @@
+using Facility.AzureFunctions;
 using Facility.ConformanceApi.Http;
 using Facility.ConformanceApi.Testing;
 using Facility.Core;
@@ -14,10 +15,10 @@ public static class AzureFunctionsServerApp
 	public static void Main()
 	{
 		var host = new HostBuilder()
-			.ConfigureFunctionsWorkerDefaults()
-			.ConfigureServices(services =>
+			.ConfigureFunctionsWorkerDefaults((host, worker) =>
 			{
-				services.AddSingleton(new ConformanceApiHttpHandler(
+				worker.UseFacilityExceptionHandler(includeErrorDetails: host.HostingEnvironment.IsDevelopment());
+				worker.Services.AddSingleton(new ConformanceApiHttpHandler(
 					service: new ConformanceApiService(new ConformanceApiServiceSettings
 					{
 						Tests = LoadTests(),
