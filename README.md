@@ -20,5 +20,5 @@ func start
 Then run the conformance tool against the running service.
 
 ```sh
-dotnet FacilityConformance test --url http://localhost:7071/api/
+dotnet FacilityConformance test --url http://localhost:7071/api/ --disable-chunked-transfer
 ```
