@@ -14,11 +14,11 @@ First start the local functions server.
 
 ```sh
 cd conformance/AzureFunctionsServer
-func start
+func start --port 4117
 ```
 
 Then run the conformance tool against the running service.
 
 ```sh
-dotnet FacilityConformance test --url http://localhost:7071/api/ --disable-chunked-transfer
+dotnet FacilityConformance test --disable-chunked-transfer
 ```

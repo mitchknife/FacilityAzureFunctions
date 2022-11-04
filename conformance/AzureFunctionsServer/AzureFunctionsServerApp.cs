@@ -23,11 +23,7 @@ public static class AzureFunctionsServerApp
 					{
 						Tests = LoadTests(),
 						JsonSerializer = JsonSerializer,
-					}),
-					settings: new ServiceHttpHandlerSettings
-					{
-						RootPath = "api",
-					}));
+					})));
 			})
 			.Build();
 
