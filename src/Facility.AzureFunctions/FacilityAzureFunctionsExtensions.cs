@@ -26,6 +26,14 @@ namespace Facility.AzureFunctions
 					if (request is null)
 						throw;
 
+					if (ex is AggregateException agg)
+					{
+						// Not sure if all this is necessary, but AggregateExceptions are so ugly.
+						agg = agg.Flatten();
+						if (agg.InnerExceptions.Count == 1)
+							ex = agg.InnerExceptions[0];
+					}
+
 					var error = includeErrorDetails ? ServiceErrorUtility.CreateInternalErrorForException(ex) : ServiceErrors.CreateInternalError();
 
 					var response = request.CreateResponse();
