@@ -12,7 +12,8 @@ namespace AzureFunctionsServer
 	public static class ConformanceApiFunctions
 	{
 		[Function("getApiInfo")]
-		public static Task<HttpResponseData> GetApiInfoAsync([HttpTrigger("GET", Route = "")] HttpRequestData request) =>
+		// Azure Functions cannot currently route to "", so we add the "optional" regex below.
+		public static Task<HttpResponseData> GetApiInfoAsync([HttpTrigger("GET", Route = "{_:regex(,)?}")] HttpRequestData request) =>
 			FacilityAzureFunctionsUtility.HandleHttpRequestAsync<ConformanceApiHttpHandler>(request, x => x.TryHandleGetApiInfoAsync);
 
 		[Function("getWidgets")]

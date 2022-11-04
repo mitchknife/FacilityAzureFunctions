@@ -67,6 +67,14 @@ public sealed class AzureFunctionsGenerator : CodeGenerator
 						code.WriteLineSkipOnce();
 						code.WriteObsoleteAttribute(methodInfo);
 						code.WriteLine($"[Function(\"{methodInfo.Name}\")]");
+
+						if (route.Length == 0)
+						{
+							// The regex can be for anything that should never be an actual route. "," seemed like a good choice.
+							route = "{_:regex(,)?}";
+							code.WriteLine("// Azure Functions cannot currently route to \"\", so we add the \"optional\" regex below.");
+						}
+
 						code.WriteLine($"public static Task<HttpResponseData> {pascalCaseMethodName}Async([HttpTrigger(\"{httpMethodInfo.Method}\", Route = \"{route}\")] HttpRequestData request) =>");
 						using (code.Indent())
 							code.WriteLine($"FacilityAzureFunctionsUtility.HandleHttpRequestAsync<{httpHandlerClassName}>(request, x => x.TryHandle{pascalCaseMethodName}Async);");
