@@ -45,7 +45,7 @@ public sealed class AzureFunctionsGenerator : CodeGenerator
 			if (azFuncService.Methods.OfType<HttpTriggerAzureFunctionsMethodInfo>().Any())
 			{
 				usings.Add("Microsoft.Azure.Functions.Worker.Http");
-				usings.Add("Facility.AzureFunctions");
+				usings.Add("Facility.AzureFunctions.Http");
 				usings.Add($"{apiNamespaceName}.Http");
 			}
 
@@ -90,7 +90,7 @@ public sealed class AzureFunctionsGenerator : CodeGenerator
 
 				code.WriteLine($"public static Task<HttpResponseData> {methodName}([HttpTrigger(\"{httpTrigger.Method}\", Route = \"{route}\")] HttpRequestData request) =>");
 				using (code.Indent())
-					code.WriteLine($"FacilityAzureFunctionsUtility.HandleHttpRequestAsync<{httpHandlerClassName}>(request, x => x.{httpHandlerClassMethodName});");
+					code.WriteLine($"HttpTriggerUtility.HandleHttpRequestAsync<{httpHandlerClassName}>(request, x => x.{httpHandlerClassMethodName});");
 			}
 			else
 			{

@@ -32,7 +32,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{4D0D0E9F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facility.CodeGen.AzureFunctions.UnitTests", "tests\Facility.CodeGen.AzureFunctions.UnitTests\Facility.CodeGen.AzureFunctions.UnitTests.csproj", "{F3B42AC2-D75F-4C55-8A6A-682F53F26346}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facility.AzureFunctions", "src\Facility.AzureFunctions\Facility.AzureFunctions.csproj", "{43FF41B6-DA6E-4652-BC30-0D2F11D86BA3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facility.AzureFunctions.Http", "src\Facility.AzureFunctions.Http\Facility.AzureFunctions.Http.csproj", "{43FF41B6-DA6E-4652-BC30-0D2F11D86BA3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "conformance", "conformance", "{F7406CDC-A44A-49C2-8B66-3FEF3BC1F2B5}"
 EndProject

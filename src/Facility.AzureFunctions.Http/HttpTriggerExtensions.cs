@@ -4,9 +4,9 @@ using Facility.Core.Http;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Hosting;
 
-namespace Facility.AzureFunctions
+namespace Facility.AzureFunctions.Http
 {
-	public static class FacilityAzureFunctionsExtensions
+	public static class HttpTriggerExtensions
 	{
 		public static void UseFacilityExceptionHandler(this IFunctionsWorkerApplicationBuilder builder, bool includeErrorDetails = false)
 		{

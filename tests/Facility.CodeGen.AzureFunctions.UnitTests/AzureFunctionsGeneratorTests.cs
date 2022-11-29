@@ -57,7 +57,7 @@ namespace Facility.CodeGen.AzureFunctions.UnitTests
 			GenerateFileText("service TestApi { [azfunc(trigger: http)] method do {}:{} }")
 				.Should().NotBeNullOrEmpty()
 				.And.Contain("using Microsoft.Azure.Functions.Worker.Http;")
-				.And.Contain("using Facility.AzureFunctions;")
+				.And.Contain("using Facility.AzureFunctions.Http;")
 				.And.Contain("using TestApi.Http;")
 				.And.Contain("DoAsync([HttpTrigger(");
 		}

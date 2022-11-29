@@ -2,9 +2,9 @@ using Facility.Core.Http;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Facility.AzureFunctions;
+namespace Facility.AzureFunctions.Http;
 
-public static class FacilityAzureFunctionsUtility
+public static class HttpTriggerUtility
 {
 	/// <summary>
 	/// Handles the http request using the supplied delegate.
