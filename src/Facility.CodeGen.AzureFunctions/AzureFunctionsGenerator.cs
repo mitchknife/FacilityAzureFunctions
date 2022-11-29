@@ -1,6 +1,5 @@
 using Facility.Definition;
 using Facility.Definition.CodeGen;
-using Facility.Definition.Http;
 
 namespace Facility.CodeGen.AzureFunctions;
 
@@ -32,20 +31,24 @@ public sealed class AzureFunctionsGenerator : CodeGenerator
 		var apiNamespaceName = ApiNamespaceName ?? CSharpUtility.GetNamespaceName(service);
 		var namespaceName = NamespaceName ?? apiNamespaceName;
 		var className = $"{CodeGenUtility.Capitalize(service.Name)}Functions";
-		var httpHandlerClassName = $"{CodeGenUtility.Capitalize(service.Name)}HttpHandler";
-		var httpServiceInfo = HttpServiceInfo.Create(service);
+		var azFuncService = AzureFunctionsServiceInfo.Create(service);
 
 		return new CodeGenOutput(CreateFile($"{className}{CSharpUtility.FileExtension}", code =>
 		{
 			code.WriteFileHeader(GeneratorName ?? "");
 
-			var usings = new[]
+			var usings = new List<string>
 			{
 				"Microsoft.Azure.Functions.Worker",
-				"Microsoft.Azure.Functions.Worker.Http",
-				"Facility.AzureFunctions",
-				$"{apiNamespaceName}.Http",
 			};
+
+			if (azFuncService.Methods.OfType<HttpTriggerAzureFunctionsMethodInfo>().Any())
+			{
+				usings.Add("Microsoft.Azure.Functions.Worker.Http");
+				usings.Add("Facility.AzureFunctions");
+				usings.Add($"{apiNamespaceName}.Http");
+			}
+
 			code.WriteUsings(usings, namespaceName);
 
 			code.WriteLine("#pragma warning disable 1591 // missing XML comment");
@@ -58,30 +61,42 @@ public sealed class AzureFunctionsGenerator : CodeGenerator
 				code.WriteLine($"public static class {className}");
 				using (code.Block())
 				{
-					foreach (var httpMethodInfo in httpServiceInfo.Methods)
-					{
-						var methodInfo = httpMethodInfo.ServiceMethod;
-						var pascalCaseMethodName = CodeGenUtility.Capitalize(methodInfo.Name);
-						string route = httpMethodInfo.Path.Substring(1);
-
-						code.WriteLineSkipOnce();
-						code.WriteObsoleteAttribute(methodInfo);
-						code.WriteLine($"[Function(\"{methodInfo.Name}\")]");
-
-						if (route.Length == 0)
-						{
-							// The regex can be for anything that should never be an actual route. "," seemed like a good choice.
-							route = "{_:regex(,)?}";
-							code.WriteLine("// Azure Functions cannot currently route to \"\", so we add the \"optional\" regex below.");
-						}
-
-						code.WriteLine($"public static Task<HttpResponseData> {pascalCaseMethodName}Async([HttpTrigger(\"{httpMethodInfo.Method}\", Route = \"{route}\")] HttpRequestData request) =>");
-						using (code.Indent())
-							code.WriteLine($"FacilityAzureFunctionsUtility.HandleHttpRequestAsync<{httpHandlerClassName}>(request, x => x.TryHandle{pascalCaseMethodName}Async);");
-					}
+					foreach (var azFuncMethod in azFuncService.Methods)
+						writeMethodCode(code, service, azFuncMethod);
 				}
 			}
 		}));
+
+		static void writeMethodCode(CodeWriter code, ServiceInfo service, AzureFunctionsMethodInfo azFuncMethod)
+		{
+			var serviceMethod = azFuncMethod.ServiceMethod;
+			string methodName = $"{CodeGenUtility.Capitalize(serviceMethod.Name)}Async";
+			string httpHandlerClassName = $"{CodeGenUtility.Capitalize(service.Name)}HttpHandler";
+			string httpHandlerClassMethodName = $"TryHandle{methodName}";
+
+			code.WriteLineSkipOnce();
+			code.WriteObsoleteAttribute(serviceMethod);
+			code.WriteLine($"[Function(\"{serviceMethod.Name}\")]");
+
+			if (azFuncMethod is HttpTriggerAzureFunctionsMethodInfo httpTrigger)
+			{
+				string route = httpTrigger.Route;
+				if (route.Length == 0)
+				{
+					// The regex can be for anything that should never be an actual route. "," seemed like a good choice.
+					route = "{_:regex(,)?}";
+					code.WriteLine("// Azure Functions cannot currently route to \"\", so we add the \"optional\" regex below.");
+				}
+
+				code.WriteLine($"public static Task<HttpResponseData> {methodName}([HttpTrigger(\"{httpTrigger.Method}\", Route = \"{route}\")] HttpRequestData request) =>");
+				using (code.Indent())
+					code.WriteLine($"FacilityAzureFunctionsUtility.HandleHttpRequestAsync<{httpHandlerClassName}>(request, x => x.{httpHandlerClassMethodName});");
+			}
+			else
+			{
+				throw new NotSupportedException(azFuncMethod.GetType().Name);
+			}
+		}
 	}
 
 	public override void ApplySettings(FileGeneratorSettings settings)
